@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adminidtrador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1 class="text-center mt-4, alert alert-dark" id="nusuario">Bienvenido</h1> 
+
+<!--Div para los botontes que muestran cada uno de los cruds-->
+  <div class="buttons, d-flex justify-content-center">
+    <!--Boton de registro-->
+        <button  id="RegistrarSer" type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+         Registrar Servicios
+        </button>
+    <!--Boton de registro de manzana-->
+      <button  id="RegistrarMnz" class="btn btn-outline-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+        Registrar Manzanas
+      </button>
+    <!-- Button user -->
+      <button  id="RegistrarUser"  type="button" class="btn  btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Registro Usuarios
+      </button>
+    <!-- Button eliminar -->
+      <button id="cerrarSesion" type="button" class="btn btn-outline-danger">Cerrar Sesion</button>
+  </div>
+<!-----------------------------------EDITAR SERVICIOS------------------------------------------------------>
+<!-- Modal -->
+<div class="modal fade,border border-primary alert alert-warning text-primary-emphasis" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar & Registrar Servicios</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="http://localhost:3000/Registro-Servicios" id="Registro_S" method="post">
+          <div>
+            <label for="exampleFormControlInput1" class="form-label">Nombre del Servicio</label>
+            <input type="text" class="form-control" id="nombre_server" name="nombre_server" placeholder="Cocinar" required>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Tipo de servicio</label>
+            <input type="text" class="form-control" id="tipo_server" name="tipo_server" placeholder="Gastronomia" required>
+          </div>
+          <div class="mb-3">
+            <button type="submit" name="EnviarRM" id="EnviarRM" value="Registar" class="btn btn-outline-info">Registrar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+      </div>
+      <div> 
+        <table class="table2" >
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Servicio</th>
+              <th scope="col">Tipo</th>
+            </tr>
+          </thead>
+          <tbody id="EditarSer">
+        </tbody>
+        </table>
+      </div>   
+    </div>
+  </div>
+</div>
+<div id="FormDiv"></div>
+<!-----------------------------------------Seccion en donde se encuentra las manzans-------------------------->   
+      <div style="min-height: 120px;">
+        <div class="collapse collapse-horizontal,bg-info bg-opacity-10 border border-info border-start-0 rounded-end" id="collapseWidthExample">
+          <div class="card card-body" style="width: 300px;">
+            <form action="http://localhost:3000/Registro-Manzanas" id="Registro_M" method="post">
+              <div class="mb-3">
+                  <label for="formGroupExampleInput" class="form-label">Localidad Manzana</label>
+                  <input type="text" class="form-control" id="Nombre_M"  name="Nombre_M" placeholder="Localidad Puente Aranda" required>
+                </div>
+                <div class="mb-3">
+                  <label for="formGroupExampleInput2" class="form-label">Direccion Manzana</label>
+                  <input type="text" class="form-control" id="Direccion_M" name="Direccion_M" placeholder="calle 34 # 45-78" required>
+                  <button type="submit" name="EnviarRM" id="EnviarRM" value="Registar" class="btn btn-outline-info">Registrar</button>
+              </div>
+              </form>
+          </div>
+          <div> 
+            <table class="table" >
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Manzana</th>
+                  <th scope="col">Dirreción</th>
+                </tr>
+              </thead>
+              <tbody id="EditarMnz">
+            </tbody>
+            </table>
+          </div>    
+        </div>
+      </div>
+<!-------------------------------------Usuarios---------------------------------------------->
+<!-- Modal -->
+<div class="modal fade," id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Usuarios</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div> 
+          <table class="table3" >
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">TipoDoc</th>
+                <th scope="col">Documento</th>
+                <th scope="col">Manzana</th>
+              </tr>
+            </thead>
+            <tbody id="EditarUser">
+          </tbody>
+      </div>
+        <!-- <form action="http://localhost:3000/Registro-Usuarios" id="ActuaUser" name="ActuaUser" method="post">
+          <div>
+            <label for="exampleFormControlInput1" class="form-label">Nombre Usuario</label>
+            <input type="text" class="form-control" name="nombre_user" placeholder="Pepito" required>
+          </div>
+          <div>
+            <label for="exampleFormControlInput1" class="form-label">Tipo de Documento</label>
+            <input type="text" class="form-control"  name="tipo_documento" placeholder="CC" required>
+          </div>
+          <div>
+            <label for="exampleFormControlInput1" class="form-label">Documento Identidad</label>
+            <input type="text" class="form-control"  name="documento" placeholder="100123123" required>
+          </div>
+          <button type="submit" name="EnviarRM" id="EnviarRM" value="Registar" class="btn btn-outline-info">Registrar</button>
+        </form> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+</div>
+
+
+<!--Scriptionano-->
+      <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+             /*const parms = new URLSearchParams(window.location.search);
+            const admin = parms.get('admin');
+            document.getElementById('administrador').textContent = admin;*/ 
+
+                //Esete espacio es para poder registrar las manzanas 
+               /*  const Nombre_M = document.getElementById('Nombre_M');
+ */
+            //=======================Editar Manzana==========================          
+            const EditarMnz=document.getElementById('EditarMnz');
+            const RegistrarMnz=document.getElementById('RegistrarMnz');
+
+            //=======================Editar Servicios======================================== 
+            const EditarSer=document.getElementById('EditarSer');
+            const RegistrarSer=document.getElementById('RegistrarSer');
+            
+
+            //====================Editar Manzanas=================================
+            RegistrarMnz.addEventListener('click',()=>{
+                const xhr=new XMLHttpRequest();
+                xhr.open('POST','/obtener-manzanas',true);
+                xhr.setRequestHeader('Content-type','application/json');
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState === 4){
+                        if(xhr.status === 200){
+                            const data=JSON.parse(xhr.responseText);
+                           EditarMnz.innerHTML=data.manzanasr.map(indicador=>`
+                            <tr>
+                              <td>${indicador[0]}</td>
+                              <td>${indicador[1]}</td>
+                              <td>${indicador[2]}</td>
+                              <td>
+                                <div class="dropdown mt-3,">
+                                <button id="FormEdit" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                Editar Manzana
+                                </button>
+                                <ul class="dropdown-menu">
+                                <form action="http://localhost:3000/Actualizar-Manzanas" id="Registro_M" method="post">
+                                  <label for="formGroupExampleInput" class="form-label">ID</label>
+                                <input type="text" class="form-control" id="id_m" value="${indicador[0]}" name="id_m">
+                                <div class="mb-3">
+                                <label for="formGroupExampleInput" class="form-label">Localidad Manzana</label>
+                                <input type="text" class="form-control" id="Nombre_M" value="${indicador[1]}" name="Nombre_M">
+                                </div>
+                                <div class="mb-3">
+                                <label for="formGroupExampleInput2" class="form-label">Direccion Manzana</label>
+                                <input type="text" class="form-control" id="Direccion_M" name="Direccion_M" value="${indicador[2]}">
+                                </div>
+                                <button type="submit" name="EnviarSV" id="EnviarSV" value="Registar" class="btn btn-outline-info">Registrar</button>
+                                </form>
+                                </ul>        
+                                </div>
+                                </td>
+                                </tr>`).join('') 
+                        }else{
+                            console.error('Error al obtener manzanas')
+                        }
+                    }
+                };
+                xhr.send()
+            })
+          //Fin de edicion de manzanas
+            //=====================Editar Servicios============================ 
+            RegistrarSer.addEventListener('click',()=>{
+                const xhr=new XMLHttpRequest();
+                xhr.open('POST','/obtener-Servicios',true);
+                xhr.setRequestHeader('Content-type','application/json');
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState === 4){
+                        if(xhr.status === 200){
+                            const data=JSON.parse(xhr.responseText);
+                           EditarSer.innerHTML=data.manzanasr.map(indica=>`
+                            <tr>
+                              <td>${indica[0]}</td>
+                              <td>${indica[1]}</td>
+                              <td>${indica[2]}</td>
+                              <td>
+                                <div class="dropdown mt-3">
+                                <button id="FormEdit" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                Editar Servicio
+                                </button> 
+                                <button type="submit" name="EliminiarSer" data-id="${indica[0]}" id="EliminiarSer" value="Registar" class="btn btn-outline-info">eliminar</button> 
+                                <ul class="dropdown-menu">
+                                <form action="http://localhost:3000/Actualizar-Servicios" id="Registro_S" method="post">
+                                <input type="text" class="form-control" id="id_server" value="${indica[0]}" name="id_server">
+                                <div class="mb-3">
+                                <label for="formGroupExampleInput" class="form-label">Nombre servicio</label>
+                                <input type="text" class="form-control" id="nombre_server" value="${indica[1]}" name="nombre_server">
+                                </div>
+                                <div class="mb-3">
+                                <label for="formGroupExampleInput2" class="form-label">tipo server</label>
+                                <input type="text" class="form-control" id="tipo_server" name="tipo_server" value="${indica[2]}">
+                                </div>
+                                <div class="mb-4">
+                                </div>
+                                <button type="submit" name="EnviarSER" id="EnviarSER" value="RegistarServer" class="btn btn-outline-info">Registrar</button>
+                                </form>
+                                </ul>        
+                                </div>
+                                </td>
+                                </tr>`).join('') 
+
+                                const EliminiarSer = EditarSer.querySelectorAll('#EliminiarSer')
+                                EliminiarSer.forEach(button =>{
+                                button.addEventListener('click', (event)=>{
+                                event.preventDefault();
+                                const indicam = button.dataset.id;
+                                console.log(indicam)
+                                const xhr = new XMLHttpRequest();
+                                xhr.open('DELETE','/eliminar_servicio',true)
+                                xhr.setRequestHeader('Content-type','application/json')
+                                xhr.onreadystatechange=function(){
+                                    if(xhr.readyState===4){
+                                        if(xhr.status===200){
+                                            console.log("solicitud eliminada")
+                                            window.location.reload(false)}
+                                    }else{
+                                        console.log("error al borrar su solicitud") 
+                                    }}
+                                    xhr.send(JSON.stringify({indicam}))
+                                });
+                                    
+                            })
+                          
+                        }else{
+                            console.error('Error al obtener servicios')
+                        }
+                    }
+                };
+                xhr.send()
+            })
+           //Fin de edicion de Servicios
+
+
+           
+
+
+           //Usuarios
+            const EditarUser=document.getElementById('EditarUser');
+            const RegistrarUser=document.getElementById('RegistrarUser'); 
+
+            RegistrarUser.addEventListener('click',()=>{
+                const xhr=new XMLHttpRequest();
+                xhr.open('POST','/obtener-User',true);
+                xhr.setRequestHeader('Content-type','application/json');
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState === 4){
+                        if(xhr.status === 200){
+                            const data=JSON.parse(xhr.responseText);
+                            EditarUser.innerHTML=data.manzanasr.map(indicar=>`
+                            <tr>
+                              <td>${indicar[0]}</td>
+                              <td>${indicar[1]}</td>
+                              <td>${indicar[2]}</td>
+                              <td>${indicar[3]}</td>
+                              <td>${indicar[4]}</td>
+                              <td>
+                                <div class="dropdown mt-3">
+                                <button id="FormEdit" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                Editar User
+                                </button> 
+                                <button type="submit" name="EliminiarUser" data-id="${indicar[0]}" id="EliminiarUser" value="Registar" class="btn btn-outline-info">eliminar</button> 
+                                <ul class="dropdown-menu">
+                                <form action="http://localhost:3000/Actualizar-User" id="ActuaUser" method="post">
+                                <input type="text" class="form-control" id="id_usuer" value="${indicar[0]}" name="id_usuer">
+                                <div class="mb-3">
+                                <label for="formGroupExampleInput" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre_user" value="${indicar[1]}" name="nombre_user">
+                                </div>
+                                <div class="mb-3">
+                                <label for="formGroupExampleInput2" class="form-label">tipo Doc</label>
+                                <input type="text" class="form-control" id="tipo_doc" name="tipo_doc" value="${indicar[2]}">
+                                </div>
+                                <div class="mb-4">
+                                <label for="formGroupExampleInput2" class="form-label">Doc</label>
+                                <input type="text" class="form-control" id="document" name="document" value="${indicar[3]}">
+                                </div>
+                                <div class="mb-4">
+                                <label for="formGroupExampleInput2" class="form-label">Manzana</label>
+                                <input type="text" class="form-control" id="name_manzana" name="name_manzana" value="${indicar[4]}">
+                                </div>
+                                <button type="submit" name="EnviarSER" id="EnviarSER" value="RegistarServer" class="btn btn-outline-info">Registrar</button>
+                                </form>
+                                </ul>        
+                                </div>
+                                </td>
+                                </tr>`).join('') 
+
+                                const EliminiarUser = EditarSer.querySelectorAll('#EliminiarUser')
+                                EliminiarUser.forEach(button =>{
+                                button.addEventListener('click', (event)=>{
+                                event.preventDefault();
+                                const indicado = button.dataset.id;
+                                console.log(indicado)
+                                const xhr = new XMLHttpRequest();
+                                xhr.open('DELETE','/eliminar_User',true)
+                                xhr.setRequestHeader('Content-type','application/json')
+                                xhr.onreadystatechange=function(){
+                                    if(xhr.readyState===4){
+                                        if(xhr.status===200){
+                                            console.log("Usuario Eliminado")
+                                            window.location.reload(false)}
+                                    }else{
+                                        console.log("error al borrar Usuario") 
+                                    }}
+                                    xhr.send(JSON.stringify({indicado}))
+                                });
+                                    
+                            })
+                          
+                        }else{
+                            console.error('Error al obtener servicios')
+                        }
+                    }
+                };
+                xhr.send()
+            })
+
+            
+          //Cerrar Session
+      /*    const cerrarSesion = document.getElementById('cerrarSesion')
+
+          cerrarSesion.addEventListener('click',()=>{
+            const xhrout = new XMLHttpRequest();
+            xhrout.open('POST','/logOut',true)
+            xhrout.onreadystatechange=function(){
+              if(xhrout.readyState===4){
+                if(xhrout.status===200){
+                  window.location.href='http://127.0.0.1:5500/vista/html/index.html'
+                }
+                else{
+                  console.log('error al cerrar sesion')
+                }
+              }
+            }
+            xhrout.send();
+          })
+          window,onload=function(){
+            window.history.forward();
+          }
+          window.onpageshow=
+          function(event){
+            if(event.persisted){
+              window.location.reload();
+            }
+          } 
+             */
+    });
+    </script>
+</body>
+</html>
+
+
+
